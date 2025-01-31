@@ -1,0 +1,12 @@
+table {
+  width: 100%;
+}
+
+.table-container {
+  max-height: 800px;  
+  overflow: auto;
+}
+
+mat-paginator {
+  margin-top: 10px;
+}
