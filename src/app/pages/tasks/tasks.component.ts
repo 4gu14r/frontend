@@ -1,10 +1,12 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-tasks',
-  imports: [MatTableModule, MatPaginatorModule],
+  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css'
 })
@@ -20,6 +22,12 @@ export class TasksComponent {
       this.dataSource.paginator = this.paginator;
     }
   }
+
+  onFabClick() {
+    console.log("Botão flutuante clicado!");
+    // Adicione aqui qualquer ação ao clicar no botão, como abrir um modal
+  }
+  
 
 }
 

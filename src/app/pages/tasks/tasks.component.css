@@ -10,3 +10,37 @@ table {
 mat-paginator {
   margin-top: 10px;
 }
+
+/* Garante que a tabela ocupe 100% do espaço disponível */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* Adiciona transição suave para a borda */
+.table-container table tr {
+  transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12); /* Borda padrão */
+  cursor: pointer;
+}
+
+/* Aumenta a borda ao passar o mouse */
+.table-container table tr:hover {
+  border-bottom: 3px solid rgba(0, 0, 0, 0.6); /* Borda mais espessa */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil para destacar a linha */
+  background-color: rgba(0, 0, 0, 0.04); /* Leve destaque na linha */
+}
+
+/* Remove a borda padrão do último elemento para evitar salto visual */
+.table-container table tr:last-child:hover {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.floating-button {
+  width: 80px;  /* Aumenta a largura */
+  height: 80px; /* Aumenta a altura */
+  position: fixed;
+  bottom: 35px;
+  right: 35px;
+  z-index: 1000;
+}
