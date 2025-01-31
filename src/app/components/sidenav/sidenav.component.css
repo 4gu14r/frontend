@@ -1,0 +1,36 @@
+/* Garante que o container do layout ocupe 100% da largura e altura da tela */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Faz o layout ocupar toda a altura da tela */
+  width: 100vw; /* Faz o layout ocupar toda a largura da tela */
+  overflow: hidden; /* Impede a barra de rolagem extra */
+}
+
+/* O container do sidenav deve ocupar toda a altura e largura da tela */
+mat-sidenav-container {
+  flex: 1;
+  display: flex;
+  height: 100%; /* Garante que ocupe toda a altura */
+  width: 100%; /* Garante que ocupe toda a largura */
+  overflow: hidden; /* Impede que o sidenav ou o conteúdo ultrapassem a altura */
+}
+
+/* O sidenav ocupa toda a altura e largura disponíveis */
+mat-sidenav {
+  background-color: antiquewhite; /* Aplica cor ao menu lateral */
+  height: 100%; /* Faz com que o sidenav ocupe toda a altura */
+  width: 250px; /* Tamanho fixo para o sidenav, você pode ajustar */
+  flex-shrink: 0; /* Evita que o sidenav encolha */
+}
+
+/* Conteúdo que será exibido ao lado do sidenav */
+mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Faz o conteúdo ocupar toda a altura restante */
+  width: 100%; /* Garante que o conteúdo ocupe toda a largura */
+  overflow: hidden; /* Impede scroll indesejado */
+  padding: 16px;
+  background-color: white; /* Cor de fundo do conteúdo */
+}

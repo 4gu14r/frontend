@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 
+import { SidenavComponent } from '../components/sidenav/sidenav.component';
+
 @Component({
   selector: 'app-layout',
-  imports: [],
+  imports: [SidenavComponent],
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css'
+  styleUrl: './layout.component.css',
 })
 export class LayoutComponent {
-
 }
