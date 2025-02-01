@@ -3,7 +3,7 @@ table {
 }
 
 .table-container {
-  max-height: 800px;  
+  max-height: 800px;
   overflow: auto;
 }
 
@@ -43,4 +43,60 @@ mat-paginator {
   bottom: 35px;
   right: 35px;
   z-index: 1000;
+}
+
+.custom-icon-button {
+  border: none !important;
+  background: transparent;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Efeito de hover */
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    transform: scale(1.1);
+
+    .icon-animation {
+      color: #810d0d; /* Cor do Material Design primary */
+    }
+  }
+
+  /* Efeito ao clicar */
+  &:active {
+    transform: scale(0.95);
+  }
+}
+
+.icon-animation {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 24px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+/* Mantenha os outros estilos existentes */
+.action-header {
+  width: 25px;
+  text-align: center;
+}
+
+.action-cell {
+  padding: 0 24px;
+  text-align: center;
+}
+
+.floating-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+}
+
+.mat-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }

@@ -1,61 +1,101 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
-import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
+// Objetivo: Componente de listagem de tarefas
+import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { DialogComponent } from '../../components/dialog/dialog.component';
 
+// Componentes do Angular Material
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTable, MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatIcon } from '@angular/material/icon';
+import { Router } from '@angular/router';
+import { MatFabButton } from '@angular/material/button';
+import { MatDialog } from '@angular/material/dialog';
+import {  MatMenuModule  } from '@angular/material/menu';
+
+// Componentes do PrimeNG
+
+// Interface de dados da tabela
 @Component({
   selector: 'app-tasks',
-  imports: [MatTableModule, MatPaginatorModule, MatIconModule, MatButtonModule],
+  imports: [
+    CommonModule,
+    MatTable,
+    MatTableModule,
+    MatPaginator,
+    MatIcon,
+    MatFabButton,
+    MatMenuModule,
+    DialogComponent
+  ],
   templateUrl: './tasks.component.html',
-  styleUrl: './tasks.component.css'
+  styleUrl: './tasks.component.css',
 })
+export class TasksComponent implements AfterViewInit {
+  displayedColumns: string[] = ['id', 'title', 'description', 'completed', 'action'];
+  dataSource = new MatTableDataSource<TaskTable>(TASKS);
+  private dialog = inject(MatDialog);
 
-export class TasksComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator | undefined;
+  constructor(private router: Router) {}
 
   ngAfterViewInit() {
-    if (this.paginator) {
-      this.dataSource.paginator = this.paginator;
-    }
+    this.dataSource.paginator = this.paginator;
   }
 
-  onFabClick() {
-    console.log("Botão flutuante clicado!");
-    // Adicione aqui qualquer ação ao clicar no botão, como abrir um modal
+  onCreateNew() {
+    this.router.navigate(['/tasks/form']);
   }
-  
+
+  onEditRow(row: TaskTable) {
+    this.router.navigate(['/tasks/form', row.id]);
+  }
+
+  deleteTask(element: any): void {
+    // Lógica de deleção
+    console.log('Deletando:', element);
+  }
+
+  openDeleteDialog(element: any): void {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: { taskTitle: element.title }
+    });
+
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed) {
+        this.deleteTask(element);
+      }
+    });
+  }
 
 }
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+
+export interface TaskTable {
+  id: number;
+  title: String;
+  description: Number;
+  completed: String;
 }
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-  {position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na'},
-  {position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg'},
-  {position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al'},
-  {position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si'},
-  {position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P'},
-  {position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S'},
-  {position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl'},
-  {position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar'},
-  {position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K'},
-  {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
+const TASKS: TaskTable[] = [
+  {id: 1, title: 'Hydrogen', description: 1.0079, completed: 'H'},
+  {id: 2, title: 'Helium', description: 4.0026, completed: 'He'},
+  {id: 3, title: 'Lithium', description: 6.941, completed: 'Li'},
+  {id: 4, title: 'Beryllium', description: 9.0122, completed: 'Be'},
+  {id: 5, title: 'Boron', description: 10.811, completed: 'B'},
+  {id: 6, title: 'Carbon', description: 12.0107, completed: 'C'},
+  {id: 7, title: 'Nitrogen', description: 14.0067, completed: 'N'},
+  {id: 8, title: 'Oxygen', description: 15.9994, completed: 'O'},
+  {id: 9, title: 'Fluorine', description: 18.9984, completed: 'F'},
+  {id: 10, title: 'Neon', description: 20.1797, completed: 'Ne'},
+  {id: 11, title: 'Sodium', description: 22.9897, completed: 'Na'},
+  {id: 12, title: 'Magnesium', description: 24.305, completed: 'Mg'},
+  {id: 13, title: 'Aluminum', description: 26.9815, completed: 'Al'},
+  {id: 14, title: 'Silicon', description: 28.0855, completed: 'Si'},
+  {id: 15, title: 'Phosphorus', description: 30.9738, completed: 'P'},
+  {id: 16, title: 'Sulfur', description: 32.065, completed: 'S'},
+  {id: 17, title: 'Chlorine', description: 35.453, completed: 'Cl'},
+  {id: 18, title: 'Argon', description: 39.948, completed: 'Ar'},
+  {id: 19, title: 'Potassium', description: 39.0983, completed: 'K'},
+  {id: 20, title: 'Calcium', description: 40.078, completed: 'Ca'},
 ];
