@@ -1,11 +1,11 @@
-import {RouterOutlet, RouterLink } from '@angular/router';
-import {MediaMatcher} from '@angular/cdk/layout';
-import {Component, OnDestroy, inject, signal} from '@angular/core';
-import {MatListModule} from '@angular/material/list';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatIconModule} from '@angular/material/icon';
-import {MatButtonModule} from '@angular/material/button';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { RouterOutlet, RouterLink } from '@angular/router';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { Component, OnDestroy, inject, signal } from '@angular/core';
+import { MatListModule } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-sidenav',
